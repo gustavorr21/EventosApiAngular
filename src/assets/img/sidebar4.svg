@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.55 38.64" id="svg">
+  <g id="Camada_2" data-name="Camada 2">
+    <g id="Camada_1-2" data-name="Camada 1">
+      <line x1="5.72" y1="27.35" x2="14.85" y2="27.35" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <polyline points="20.75 1.02 28.04 1.02 28.04 8.4" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="19.78" y1="9.47" x2="27.89" y2="1.36" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <polyline points="16.03 13.62 8.74 13.62 8.74 6.24" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="17" y1="5.17" x2="8.89" y2="13.28" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <path d="M19.8,33.42H5a4,4,0,0,1-4-4V5A4,4,0,0,1,5,1h9.74" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="28.04" y1="14.31" x2="28.04" y2="17.88" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="5.72" y1="21.77" x2="20.17" y2="21.77" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <path d="M30.53,25.93c-1.12-.83-5.07-1.14-5.46,1.37s1.93,3,3,3.34c.57.22,3.34.7,2.66,3.84-.64,2.94-4.7,2.28-5.9.81m3.24-11v13.6"
+        style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px" />
+    </g>
+  </g>
+</svg>

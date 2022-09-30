@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EventoRoutingModule } from './evento-routing.module';
 import { EventosPageComponent } from './eventos-page/eventos-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -10,8 +11,10 @@ import { EventosPageComponent } from './eventos-page/eventos-page.component';
     EventosPageComponent
   ],
   imports: [
+    
     CommonModule,
-    EventoRoutingModule
+    EventoRoutingModule,
+    SharedModule
   ]
 })
 export class EventoModule { }

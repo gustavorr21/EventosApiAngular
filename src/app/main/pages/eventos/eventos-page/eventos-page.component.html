@@ -1,1 +1,165 @@
-<p>eventos-page works!</p>
+<header class="content__title d-flex justify-content-between align-items-center">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" [routerLink]="['/']"><a>Início</a></li>
+    <li class="breadcrumb-item active"><a [routerLink]="['/eventos']">Eventos</a></li>
+  </ol>
+
+  <div class="actions">
+    <a [routerLink]="['novo']" class="btn lx-btn">Novo evento</a>
+  </div>
+</header>
+<div>
+
+  <div class="card">
+    <div class="card-block new-skin-body">
+      <div>
+        <h2 class="card-title">Eventos</h2>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="div-grid pt-5">
+            <div class="mat-elevation-z8">
+              <!-- <form [formGroup]="form" novalidate autocomplete="off">
+
+                <mat-card class="material-card">
+                  <mat-card-content>
+                    <div class="row mt-2">
+
+                      <div class="col-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Equipamento</mat-label>
+                          <input matInput placeholder="Equipamento" formControlName="equipamento">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Modelo</mat-label>
+                          <input matInput placeholder="Modelo" formControlName="modelo">
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+
+                    <div class="row mt-2">
+                      <div class="col d-flex flex-row-reverse">
+                        <button type="button" class="btn lx-btn">
+                          Exportar
+                        </button>
+                      </div>
+                    </div>
+
+                  </mat-card-content>
+                </mat-card>
+
+              </form> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="div-grid pt-5">
+            <div class="mat-elevation-z8">
+              <mat-table [dataSource]="eventos" matSort matSortActive="local" matSortDirection="asc"
+                matSortDisableClear>
+
+                <ng-container cdkColumnDef="local">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="local">
+                    local
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.local}}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="tema">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="tema">
+                    tema
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.tema}}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="qtdPessoas">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="qtdPessoas">
+                    qtdPessoas
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.qtdPessoas}}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="email">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="email">
+                    email
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.email}}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="lotes">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="lotes">
+                    lotes
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.lotes}}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="imagemUrl">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="imagemUrl">
+                    imagemUrl
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.imagemUrl }}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container cdkColumnDef="telefone">
+                  <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="telefone">
+                    telefone
+                  </mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <mat-label>{{row.telefone }}</mat-label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="acoes">
+                  <mat-header-cell class="grid-head-tabela-acoes" *cdkHeaderCellDef>Ações</mat-header-cell>
+                  <mat-cell *cdkCellDef="let row">
+                    <div class="container text-right">
+                      <button title='Editar' type="button" class="btn btn-sm btn-link btn-link-layout mr-2"
+                        [disabled]="!row.ativo" [routerLink]="['/equipamentos', row.equipamentoId]">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button title='Excluir' type="button" class="btn btn-sm btn-link btn-link-layout mr-2"
+                        *ngIf="row.ativo">
+                        <i class="material-icons">delete</i>
+                      </button>
+                      <button title='Ativar' type="button" class="btn btn-sm btn-link btn-link-layout mr-2"
+                        *ngIf="!row.ativo">
+                        <i class="material-icons">add_circle</i>
+                      </button>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *cdkHeaderRowDef="columnsToDisplay"></mat-header-row>
+                <mat-row class="grid-corpo-tabela" *cdkRowDef="let row; columns: columnsToDisplay"></mat-row>
+              </mat-table>
+
+              <mat-paginator 
+                [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of users">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.93 34.33" id="svg">
+  <g id="Camada_2" data-name="Camada 2">
+    <g id="Camada_1-2" data-name="Camada 1">
+      <path d="M16.29,33.33H5.8A4.8,4.8,0,0,1,1,28.53V5.8A4.8,4.8,0,0,1,5.8,1H23.39a4.8,4.8,0,0,1,4.8,4.8V18.68" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="6.37" y1="7.35" x2="7.17" y2="7.35" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="10.04" y1="7.35" x2="22.17" y2="7.35" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="6.37" y1="11.83" x2="7.17" y2="11.83" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="10.04" y1="11.83" x2="22.17" y2="11.83" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <line x1="6.37" y1="16.31" x2="7.17" y2="16.31" style="fill:none;;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px" />
+      <path d="M22.5,26.29l4.83,4.84a.8.8,0,0,0,1.13,0l.43-.43a.79.79,0,0,0,0-1.13l-2.21-2.22,2.51-2.51a.79.79,0,0,0,0-1.13L29,23.55a.8.8,0,0,0-1.13,0L25.4,26.07l-2.22-2.22a.8.8,0,0,0-1.13,0l-1,1"
+        style="fill:none;;stroke-linecap:round;stroke-linejoin:round" />
+      <line x1="24.48" y1="28.27" x2="19.59" y2="33.16" style="fill:none;;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+  </g>
+</svg>

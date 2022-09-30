@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 20" id="svg">
+  <g id="Camada_2" data-name="Camada 2">
+    <g id="Camada_1-2" data-name="Camada 1">
+      <circle cx="2" cy="2" r="2"  style="fill:white" />
+      <circle cx="2" cy="10" r="2" style="fill:white" />
+      <circle cx="2" cy="18" r="2" style="fill:white" />
+    </g>
+  </g>
+</svg>
