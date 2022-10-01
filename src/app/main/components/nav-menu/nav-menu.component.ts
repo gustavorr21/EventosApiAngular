@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { MenuItem } from 'src/app/shared/models/auth/menu-item';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-menu.component.scss'],
 })
 export class NavMenuComponent implements OnInit {
-  isCollapsed = false;
   
+  @Input() itensMenu: MenuItem[] | any;
+  @Input() userName: string | any;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+  logout(): void {
+    // reset login status
+    // this.authService.ssoLogout();
   }
 
 }
