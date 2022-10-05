@@ -12,6 +12,26 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/eventos/evento.module').then((m) => m.EventoModule),
       },
+      {
+        path: 'palestrante',
+        loadChildren: () =>
+          import('./pages/palestrantes/palestrante.module').then((m) => m.PalestranteModule),
+      },
+      {
+        path: 'perfil',
+        loadChildren: () =>
+          import('./pages/perfil/perfil.module').then((m) => m.PerfilModule),
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+      {
+        path: 'contatos',
+        loadChildren: () =>
+          import('./pages/contatos/contato.module').then((m) => m.ContatoModule),
+      },
     ]
   },
 ];

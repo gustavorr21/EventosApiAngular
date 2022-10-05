@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EventoRoutingModule } from './evento-routing.module';
-import { EventosPageComponent } from './eventos-page/eventos-page.component';
+import { ContatoRoutingModule } from './contato-routing.module';
+import { ContatoPageComponent } from './contato-page/contato-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    EventosPageComponent
+    ContatoPageComponent
   ],
   imports: [
     CommonModule,
-    EventoRoutingModule,
+    ContatoRoutingModule,
     SharedModule
   ]
 })
-export class EventoModule { }
+export class ContatoModule { }
