@@ -4,50 +4,66 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EventoService } from './shared/services/evento.service';
-import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import {PortalModule} from '@angular/cdk/portal';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSortModule} from '@angular/material/sort';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatTreeModule} from '@angular/material/tree';
-import {OverlayModule} from '@angular/cdk/overlay';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
+
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+import { NgxMaskModule } from 'ngx-mask';
+// import { ToastrModule } from 'ngx-toastr';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, POSITION, SPINNER } from 'ngx-ui-loader';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { RouterModule } from '@angular/router';
+
+const MOMENT_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MM YYYY'
+  },
+};
+
+const toastrConfig = {
+  positionClass: 'toast-top-center',
+  preventDuplicates: true
+};
+
+const ngxUiLoaderConfig = {
+  bgsOpacity: 0.5,
+  bgsType: SPINNER.threeBounce,
+  bgsPosition: POSITION.centerCenter,
+  bgsColor: '#846ea0',
+  fgsType: SPINNER.threeBounce,
+  fgsPosition: POSITION.centerCenter,
+  fgsColor: '#846ea0',
+  fgsSize: 0,
+  pbColor: '#846ea0',
+  logoUrl: './assets/img/anima-logo-124.gif',
+  blur: 1,
+};
+
+const ngxUiLoaderHttpConfig = {
+  showForeground: true
+};
+
+const ngxCurrencyConfig = {
+  align: 'right',
+  allowNegative: true,
+  allowZero: true,
+  decimal: ',',
+  precision: 2,
+  prefix: 'R$ ',
+  suffix: '',
+  thousands: '.',
+  nullable: true
+};
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -56,15 +72,32 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
+    RouterModule,
     SharedModule,
 
     ReactiveFormsModule,
 
     HttpClientModule,
 
+    NgxMaskModule.forRoot(),
+    // ToastrModule.forRoot(toastrConfig),
+
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule,
+    NgxUiLoaderHttpModule.forRoot(ngxUiLoaderHttpConfig),
+    // NgxCurrencyModule.forRoot(ngxCurrencyConfig)
   ],
-  providers: [EventoService],
+  providers: [EventoService,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: false } },
+    { provide: MAT_DATE_FORMATS, useValue: MOMENT_FORMATS },
+    { provide: DateAdapter, useClass: MomentDateAdapter },
+    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false } }
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+  exports: [RouterModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
