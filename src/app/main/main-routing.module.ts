@@ -32,8 +32,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/contatos/contato.module').then((m) => m.ContatoModule),
       },
-    ]
+    ],
+
   },
+  {path: '**', redirectTo:'dashboard', pathMatch:'full',}
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
