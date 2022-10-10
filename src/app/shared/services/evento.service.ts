@@ -30,14 +30,14 @@ export class EventoService {
       );
   }
 
-  incluirEvento(evento: Evento): Observable<any> {
+  incluirEvento(evento: any): Observable<any> {
     return this.http.post(`${this.baseURL}/incluir-evento`, { evento })
       .pipe(
         take(1),
       );
   }
 
-  atualizarEvento(evento: Evento): Observable<any> {
+  atualizarEvento(evento: any): Observable<any> {
     const url = `${this.baseURL}/${evento.id}`;
     return this.http.patch(url, { evento })
       .pipe(

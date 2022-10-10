@@ -150,11 +150,41 @@ export class EventosDetailComponent implements OnInit {
     }
   }
   submit(): void {
-    const form = this.form.getRawValue();
+
+    let form = this.form.getRawValue();
+
+    form.lotes.map((lote: Lote, index: any | any) => {
+      if (lote.id == 0)
+        this.lotesParalelosFiltro.push({
+          remover: lote.remover,
+          id: lote.id,
+          nome: lote.nome,
+          preco: lote.preco,
+          dataInicio: lote.dataInicio,
+          dataFim: lote.dataFim,
+          quantidade: lote.quantidade,
+          eventoId: lote.eventoId,
+        });
+      else
+        this.lotesParalelosFiltro[index] = {
+          id: lote.id,
+          remover: lote.remover,
+          nome: lote.nome,
+          preco: lote.preco,
+          dataInicio: lote.dataInicio,
+          dataFim: lote.dataFim,
+          quantidade: lote.quantidade,
+          eventoId: lote.eventoId,
+        };
+    });
+    const formEvento = {
+      evento: form.evento,
+      equipamentos: this.lotesParalelosFiltro
+    };
 
     const request = (this.isNew)
-      ? this.eventoService.incluirEvento(form)
-      : this.eventoService.atualizarEvento(form);
+      ? this.eventoService.incluirEvento(formEvento)
+      : this.eventoService.atualizarEvento(formEvento);
 
     request.subscribe(
       res => {
