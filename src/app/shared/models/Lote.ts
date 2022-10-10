@@ -9,4 +9,5 @@ export interface Lote {
   quantidade: number;
   eventoId: number;
   evento: Evento;
+  remover: boolean;
 }

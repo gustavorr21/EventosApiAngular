@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { merge, Subject } from 'rxjs';
 
+
+import { MatDialog } from '@angular/material/dialog';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Evento } from 'src/app/shared/models/Evento';
 import { EventoService } from 'src/app/shared/services/evento.service';
-
-
-
-
+import { DialogDeleteEventoComponentComponent } from '../dialog-delete-evento-component/dialog-delete-evento-component.component';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -24,6 +24,8 @@ export class EventosPageComponent implements OnInit {
   private unsub$ = new Subject();
 
   form: FormGroup | any;
+
+
 
   eventos: {
     totalCount: 0;
@@ -45,7 +47,9 @@ export class EventosPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   @ViewChild(MatSort) sort: MatSort | any;
 
-  constructor(private eventoService: EventoService) {}
+  constructor(private eventoService: EventoService,
+    private dialog: MatDialog,
+    ) {}
 
   ngOnInit(): void {
     this.carregarEventos();
@@ -60,7 +64,7 @@ export class EventosPageComponent implements OnInit {
         this.carregarEventos();
       });
 
-    
+
     this.carregarEventos();
   }
 
@@ -74,4 +78,41 @@ export class EventosPageComponent implements OnInit {
     this.unsub$.next();
     this.unsub$.complete();
   }
+
+  delete(id: number) {
+    const dialogRefConfi = this.modalDeleteEvento('Confirma a exclusão do evento?');
+
+    dialogRefConfi.afterClosed()
+      .subscribe(res => {
+        if (res) {
+          this.eventoService.excluirEventoPorId(id)
+            .subscribe(
+              () => {
+                // this.toastr.success('Tecnologia inativada com sucesso!');
+                this.carregarEventos();
+              },
+              // error => this.showToastError(error)
+            );
+        }
+      });
+  }
+
+  private modalDeleteEvento(mensagem: string) {
+    return this.dialog.open(DialogDeleteEventoComponentComponent, {
+      width: '30%',
+      data: {
+        message: mensagem,
+        buttonText: {
+          ok: 'Sim',
+          cancel: 'Não',
+          title: 'Atenção'
+        }
+      }
+    });
+  }
+
+  public mostraImagem(imagemURL: string): string {
+    return `./../../../../../assets/img/${imagemURL}`;
+  }
+
 }

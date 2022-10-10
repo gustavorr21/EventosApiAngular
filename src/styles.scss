@@ -3449,9 +3449,9 @@ html {
 
   a.lx-btn,
   button.lx-btn {
-    background: #411e5a;
+    background: #453A3A;
     border: 1px solid #fafafa !important;
-    border-radius: 16px;
+    border-radius: 10px;
     color: #ffffff;
     transform: all 0.1s;
   }
@@ -3459,13 +3459,13 @@ html {
   a.lx-btn:focus,
   button.lx-btn:focus {
     color: white;
-    background-image: linear-gradient(to right, #f0462d, #ffb914);
+    background-image: linear-gradient(to right, #ECE0D0, #D39E7C);
   }
 
   a.lx-btn:hover,
   button.lx-btn:hover {
     color: white;
-    background-image: linear-gradient(to right, #f0462d, #ffb914);
+    background-image: linear-gradient(to right, #ECE0D0, #D39E7C);
   }
 
   div:nth-child(1).new-skin-header:first-child {
@@ -3978,8 +3978,8 @@ html {
   }
 
   .custom-control-input:checked ~ .custom-control-label::before {
-    border-color: #411e5a;
-    background-color: #411e5a;
+    border-color: #6c584c;
+    background-color: #6c584c;
   }
 
   .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
@@ -4958,7 +4958,7 @@ html {
   }
 
   .breadcrumb-item > a:not(:nth-child(10)) {
-    color: #411e5a;
+    color: #212529;
   }
 
   .breadcrumb-item:first-child::before {
@@ -9809,7 +9809,7 @@ html {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 0;
-    color: #411e5a;
+    color: #030A11;
   }
 
   .card-subtitle {
@@ -10878,7 +10878,7 @@ html {
   }
 
   .color-deep-purple {
-    color: #673ab7 !important;
+    color: red !important;
   }
 
   .bg-indigo {
@@ -11505,7 +11505,7 @@ html {
   }
 
   .header {
-    background: #411e5a;
+    background: #ccb69b;
     position: fixed;
     width: calc(100% - 65px);
     height: 65px;
@@ -11566,8 +11566,8 @@ html {
   }
 
   .navigation-trigger__line {
-    height: 2px;
-    background-color: #411e5a;
+    height: 3px;
+    background-color: #a98467;
     display: block;
     position: relative;
   }
@@ -12087,7 +12087,7 @@ html {
     &.active {
       a {
         i {
-          color: #411e5a;
+          color: #6c584c;
         }
       }
     }
@@ -12096,7 +12096,7 @@ html {
       &:not(.active) {
         a {
           i {
-            color: #411e5a;
+            color: #6c584c;
           }
         }
       }
@@ -13094,7 +13094,7 @@ html {
     }
 
     .grid-head-tabela.mat-header-cell {
-      color: #411e5a;
+      color: #030A11;
       font-size: 14px;
       padding-bottom: 0;
       margin-bottom: 0;
@@ -13104,7 +13104,7 @@ html {
       flex: 1;
       display: flex;
       justify-content: flex-end;
-      color: #411e5a;
+      color: #030A11;
       font-size: 14px;
       padding-bottom: 0;
       margin-bottom: 0;

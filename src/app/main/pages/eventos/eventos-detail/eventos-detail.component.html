@@ -1,0 +1,192 @@
+<header class="content__title d-flex justify-content-between align-items-center">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" [routerLink]="['/']">
+      <a>Início</a>
+    </li>
+    <li class="breadcrumb-item active">
+      <a [routerLink]="['/eventos']">Eventos</a>
+    </li>
+    <li class="breadcrumb-item" *ngIf="!eventoId">
+      <a>Novo</a>
+    </li>
+  </ol>
+</header>
+
+<div class="container-fluid">
+  <form [formGroup]="form" novalidate autocomplete="off">
+
+    <mat-card class="material-card mt-4 mb-4" formGroupName="evento">
+      <mat-card-header>
+        <mat-card-title>Evento</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+
+          <input type="hidden" formControlName="id">
+
+          <div class="col-sm-12">
+            <mat-form-field class="full-width">
+              <mat-label>local</mat-label>
+              <input matInput placeholder="local" formControlName="local">
+              <mat-error *ngIf="form.get('evento.local').hasError('required')">
+                Entre com uma local
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="full-width">
+            <input matInput
+                   [matDatepicker]="dataEvento"
+                   dateMask
+                   formControlName="dataEvento"
+                   placeholder="Data Evento">
+            <mat-datepicker-toggle matSuffix [for]="dataEvento"></mat-datepicker-toggle>
+            <mat-datepicker #dataEvento></mat-datepicker>
+            <mat-error *ngIf="form.get('evento.dataEvento').hasError('dateIsGreatherThenOrEquals')">
+              A data inicial deve ser menor ou igual a data final
+            </mat-error>
+            <mat-error *ngIf="form.get('evento.dataEvento').hasError('allOrNoneFieldsRequired')">
+              A data inicial deve ser informada
+            </mat-error>
+          </mat-form-field>
+
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-3">
+                <mat-form-field class="full-width">
+                  <mat-label>Tema</mat-label>
+                  <input matInput placeholder="tema" formControlName="tema">
+                  <mat-error *ngIf="form.get('evento.tema').hasError('required')">
+                    Entre com um tema
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-3">
+                <mat-form-field class="full-width">
+                  <mat-label>qtdPessoas</mat-label>
+                  <input matInput placeholder="qtdPessoas" formControlName="qtdPessoas">
+                  <mat-error *ngIf="form.get('evento.qtdPessoas').hasError('required')">
+                    Entre com um qtdPessoas
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-3">
+                <mat-form-field class="full-width">
+                  <mat-label>imagemURL</mat-label>
+                  <input matInput placeholder="imagemURL" formControlName="imagemURL">
+                  <mat-error *ngIf="form.get('evento.imagemURL').hasError('required')">
+                    Entre com um qtdPessoas
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-3">
+                <mat-form-field class="full-width">
+                  <mat-label>telefone</mat-label>
+                  <input matInput placeholder="telefone" formControlName="telefone">
+                  <mat-error *ngIf="form.get('evento.telefone').hasError('required')">
+                    Entre com um tema
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-3">
+                <mat-form-field class="full-width">
+                  <mat-label>email</mat-label>
+                  <input matInput placeholder="email" formControlName="email">
+                  <mat-error *ngIf="form.get('evento.email').hasError('required')">
+                    Entre com um email
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="" formArrayName="lotes">
+      <mat-card-header>
+        <mat-card-title>
+          <div class="d-flex border-bottom">
+              Lotes do Evento
+              <i class="fas fa-money-bill-wave"></i>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list role="list" class="col-md-4">
+
+          <button class="d-flex btn btn-outline-primary mb-3" (click)="addLote()">
+            <i class="fa fa-plus-circle"></i>
+            <b class="ml-1">Lote</b>
+          </button>
+          <mat-list-item role="listitem"
+                         *ngFor="let lote of lotesArray.controls; let i = index;"
+                         [formGroupName]="i">
+
+            <mat-form-field class="mr-3">
+              <mat-label>Nome</mat-label>
+              <input matInput placeholder="nome" formControlName="nome">
+              <!-- <mat-error *ngIf="lotesArray.at(i).get('nome').hasError('required')">
+                Informe o nome
+              </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="mr-3">
+              <mat-label>preco</mat-label>
+              <input matInput placeholder="preco" formControlName="preco">
+              <!-- <mat-error *ngIf="lotesArray.at(i).get('preco').hasError('required')">
+                Informe o preço
+              </mat-error> -->
+            </mat-form-field>
+
+              <mat-form-field class="mr-3">
+              <mat-label>dataInicio</mat-label>
+              <input matInput placeholder="dataInicio" formControlName="dataInicio">
+              <!-- <mat-error *ngIf="lotesArray.at(i).get('dataInicio').hasError('required')">
+                Informe a dataInicio
+              </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="mr-3">
+              <mat-label>dataFim</mat-label>
+              <input matInput placeholder="dataFim" formControlName="dataFim">
+              <!-- <mat-error *ngIf="lotesArray.at(i).get('dataFim').hasError('required')">
+                Informe a dataFim
+              </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="mr-3">
+              <mat-label>quantidade</mat-label>
+              <input matInput placeholder="quantidade" formControlName="quantidade">
+              <!-- <mat-error *ngIf="form.get('proposta.documento').hasError('required')">
+                Informe a quantidade
+              </mat-error> -->
+            </mat-form-field>
+            <button class="p-2 btn btn-sm btn-outline-warning mb-1 d-flex"
+                (click)="removeLote(i)"
+                tooltip="Excluir Lote">
+            <i class="fa fa-window-close my-1"></i>
+            <b class="ml-1 d-none d-sm-block">Excluir</b>
+          </button>
+          </mat-list-item>
+        </mat-list>
+
+      </mat-card-content>
+    </mat-card>
+  </form>
+
+  <div class="float-right">
+    <a [routerLink]="['/eventos']" class="btn lx-btn">Voltar</a>
+    <button type="button" class="btn lx-btn" (click)="submit()">Salvar</button>
+  </div>
+</div>

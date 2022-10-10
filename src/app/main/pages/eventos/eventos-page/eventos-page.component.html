@@ -115,7 +115,11 @@
                     imagemUrl
                   </mat-header-cell>
                   <mat-cell *cdkCellDef="let row">
-                    <mat-label>{{row.imagemUrl }}</mat-label>
+                    <img
+                    [src]="mostraImagem(row.imagemUrl)"
+                    [style.width.px]="50"
+                    [style.margin.px]="50">
+                    <!-- <mat-label>{{row.imagemUrl }}</mat-label> -->
                   </mat-cell>
                 </ng-container>
 
@@ -133,17 +137,13 @@
                   <mat-header-cell class="grid-head-tabela-acoes" *cdkHeaderCellDef>Ações</mat-header-cell>
                   <mat-cell *cdkCellDef="let row">
                     <div class="container text-right">
-                      <button title='Editar' type="button" class="btn btn-sm btn-link btn-link-layout mr-2"
-                        [disabled]="!row.ativo" [routerLink]="['/equipamentos', row.equipamentoId]">
+                      <button title='Editar' type="button" class="btn btn-sm btn-link btn-layout mr-2"
+                        [routerLink]="['/eventos', row.id]">
                         <i class="material-icons">edit</i>
                       </button>
-                      <button title='Excluir' type="button" class="btn btn-sm btn-link btn-link-layout mr-2"
-                        *ngIf="row.ativo">
+                      <button title='Excluir' type="button" class="btn btn-sm btn-link btn-layout mr-2"
+                        (click)="delete(row.id)">
                         <i class="material-icons">delete</i>
-                      </button>
-                      <button title='Ativar' type="button" class="btn btn-sm btn-link btn-link-layout mr-2"
-                        *ngIf="!row.ativo">
-                        <i class="material-icons">add_circle</i>
                       </button>
                     </div>
                   </mat-cell>
@@ -153,7 +153,7 @@
                 <mat-row class="grid-corpo-tabela" *cdkRowDef="let row; columns: columnsToDisplay"></mat-row>
               </mat-table>
 
-              <mat-paginator 
+              <mat-paginator
                 [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of users">
               </mat-paginator>
             </div>

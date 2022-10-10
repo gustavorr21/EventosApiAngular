@@ -1,0 +1,30 @@
+<mat-dialog-actions>
+  <button mat-icon-button [mat-dialog-close]="false" class="">
+      <i class="material-icons-outlined">close</i>
+  </button>
+</mat-dialog-actions>
+
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+  <p>
+      {{message}}
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right">
+
+  <button class="btn lx-btn btn-white"
+          mat-button
+          mat-dialog-close>
+      {{cancelButtonText}}
+  </button>
+
+  <button class="btn lx-btn"
+          mat-button
+          mat-raised-button
+          (click)="onConfirmClick()">
+      {{confirmButtonText}}
+  </button>
+
+</mat-dialog-actions>

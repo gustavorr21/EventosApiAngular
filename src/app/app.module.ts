@@ -43,7 +43,7 @@ const ngxUiLoaderConfig = {
   fgsColor: '#846ea0',
   fgsSize: 0,
   pbColor: '#846ea0',
-  logoUrl: './assets/img/anima-logo-124.gif',
+  logoUrl: './assets/img/loading-5.gif',
   blur: 1,
 };
 
