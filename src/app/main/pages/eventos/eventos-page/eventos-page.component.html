@@ -105,8 +105,8 @@
                   <mat-header-cell class="grid-head-tabela" *cdkHeaderCellDef mat-sort-header="lotes">
                     lotes
                   </mat-header-cell>
-                  <mat-cell *cdkCellDef="let row">
-                    <mat-label>{{row.lotes}}</mat-label>
+                  <mat-cell *cdkCellDef="let row; let i = index;">
+                    <mat-label>{{row.lotes[0].nome}}</mat-label>
                   </mat-cell>
                 </ng-container>
 

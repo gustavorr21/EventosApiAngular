@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../shared/models/auth/menu-item';
+import { AccountService } from '../shared/services/account.service';
 
 @Component({
   selector: 'app-main',
@@ -11,10 +12,10 @@ export class MainComponent implements OnInit {
   itensMenu: MenuItem[] | any;
   userName: string | any;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.userName = 'teste';
+    this.userName = this.accountService.userName;
 
     var keys: any[] = [];
     keys.push({'NAVIGATION_ITEMS_MAP' : '',})

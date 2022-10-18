@@ -2,16 +2,29 @@
 
 	<div class="mx-auto text-center shadow-sm bg-white rounded p-5 my-5">
 
-		<form class="form-signin">
+		<form [formGroup]="form" novalidate autocomplete="off">
+
 			<i class="fa fa-users mb-2"></i>
 			<h1 class="h3 mb-3 font-weight-normal">Entrar com</h1>
-			<label for="username" class="sr-only">Usuário</label>
-			<input type="email" id="username" class="form-control" placeholder="Usuário" name="username" required>
-			<label for="password" class="sr-only">Password</label>
-			<input type="password" id="password" class="form-control" placeholder="Senha" name="password" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+
+      <div class="col-sm-12">
+        <mat-form-field class="full-width">
+          <mat-label>Usuário</mat-label>
+          <input matInput placeholder="Usuário" formControlName="username" type="email" required>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>password</mat-label>
+          <input matInput placeholder="password" formControlName="password" type="password" required>
+
+        </mat-form-field>
+      </div>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Entrar</button>
 			<p class="mt-4 mb-2 text-muted">Não tem login? Cadastre-se abaixo</p>
-			<a class="btn btn-lg btn-link btn-block">Quero me cadastrar</a>
+			<a class="btn btn-lg btn-link btn-block" routerLink="/cadastre-se">Quero me cadastrar</a>
 		</form>
 
 	</div>

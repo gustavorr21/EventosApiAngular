@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Evento } from 'src/app/shared/models/Evento';
 import { EventoService } from 'src/app/shared/services/evento.service';
 import { Lote } from 'src/app/shared/models/Lote';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-eventos-detail',
@@ -18,6 +19,8 @@ export class EventosDetailComponent implements OnInit {
   evento: Evento | any;
   form: FormGroup | any;
   eventoId: number | any;
+  file: File | any;
+  imagemURL = 'assets/img/upload.png';
 
   get lotesArray(): FormArray {
     return this.form.get('lotes') as FormArray;
@@ -54,7 +57,7 @@ export class EventosDetailComponent implements OnInit {
         dataEvento: [null, [Validators.required]],
         tema: [null, [Validators.required]],
         qtdPessoas: [null,[Validators.required ]],
-        imagemURL: [null,[Validators.required ]],
+        imagemURL: [''],
         telefone: [null,[Validators.required]],
         email: [null,[Validators.required]],
       }),
@@ -79,16 +82,18 @@ export class EventosDetailComponent implements OnInit {
 
   updateEventoForm(evento: Evento): any {
     this.form.patchValue({
-      id: evento.id,
-      local:evento.local,
-      dataEvento:evento.dataEvento,
-      tema:evento.tema,
-      qtdPessoas:evento.qtdPessoas,
-      imagemURL:evento.imagemURL,
-      telefone:evento.telefone,
-      email:evento.email,
+      evento: {
+        id: evento.id,
+        local:evento.local,
+        dataEvento:evento.dataEvento,
+        tema:evento.tema,
+        qtdPessoas:evento.qtdPessoas,
+        // imagemURL:evento.imagemUrl,
+        telefone:evento.telefone,
+        email:evento.email,
+      }
     });
-
+    this.imagemURL = environment.apiURL + 'resources/imagens/' + this.evento.imagemUrl;
     this.updateLotesForm(evento.lotes);
   }
 
@@ -149,6 +154,32 @@ export class EventosDetailComponent implements OnInit {
       removerControl.setValue(true);
     }
   }
+
+  onFileChange(ev: any): void {
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
+
+    this.file = ev.target.files;
+    reader.readAsDataURL(this.file[0]);
+
+    this.uploadImagem();
+  }
+
+  uploadImagem(): void {
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe(
+      () => {
+        // this.carregarEvento();
+        // this.toastr.success('Imagem atualizada com Sucesso', 'Sucesso!');
+      },
+      (error: any) => {
+        // this.toastr.error('Erro ao fazer upload de imagem', 'Erro!');
+        console.log(error);
+      }
+    )
+  }
+
+
   submit(): void {
 
     let form = this.form.getRawValue();
@@ -178,8 +209,15 @@ export class EventosDetailComponent implements OnInit {
         };
     });
     const formEvento = {
-      evento: form.evento,
-      equipamentos: this.lotesParalelosFiltro
+      id : this.eventoId,
+      Local : form.evento.local,
+      DataEvento : form.evento.dataEvento,
+      Tema : form.evento.tema,
+      QtdPessoas : form.evento.qtdPessoas,
+      ImagemUrl : form.evento.imagemURL,
+      Telefone : form.evento.telefone,
+      Email : form.evento.email,
+      lotes: this.lotesParalelosFiltro
     };
 
     const request = (this.isNew)
@@ -188,14 +226,11 @@ export class EventosDetailComponent implements OnInit {
 
     request.subscribe(
       res => {
-
         if (res.success) {
           // this.toastr.success('Tecnologia salva com sucesso');
           this.router.navigate(['/eventos']);
-
           return;
         }
-
         // this.showToastError(res);
       },
       error => {

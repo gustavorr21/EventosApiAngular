@@ -112,7 +112,9 @@ export class EventosPageComponent implements OnInit {
   }
 
   public mostraImagem(imagemURL: string): string {
-    return `./../../../../../assets/img/${imagemURL}`;
+    return imagemURL !== ''
+    ? `${environment.apiURL}resources/imagens/${imagemURL}`
+    : 'assets/img/semImagem.jpeg';
   }
 
 }

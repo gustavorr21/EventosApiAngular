@@ -12,10 +12,17 @@
   </ol>
 </header>
 
-<div class="container-fluid">
-  <form [formGroup]="form" novalidate autocomplete="off">
+<div class="container-fluid row">
 
-    <mat-card class="material-card mt-4 mb-4" formGroupName="evento">
+<div class="float-right">
+  <a [routerLink]="['/eventos']" class="btn lx-btn">Voltar</a>
+  <button type="button" class="btn lx-btn" (click)="submit()">Salvar</button>
+</div>
+
+  <div [ngClass]="{'col-md-8 pr-0': !isNew, 'col-md-12': isNew}">
+    <form [formGroup]="form" novalidate autocomplete="off">
+
+      <mat-card class="material-card mt-4 mb-4" formGroupName="evento">
       <mat-card-header>
         <mat-card-title>Evento</mat-card-title>
       </mat-card-header>
@@ -72,15 +79,13 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-sm-3">
-                <mat-form-field class="full-width">
-                  <mat-label>imagemURL</mat-label>
-                  <input matInput placeholder="imagemURL" formControlName="imagemURL">
-                  <mat-error *ngIf="form.get('evento.imagemURL').hasError('required')">
-                    Entre com um qtdPessoas
-                  </mat-error>
-                </mat-form-field>
+              <!-- <div class="col-sm-3">
+                <input type="file" class="full-width"
+                #fileInput
+                (change)="onFileChange($event)">
               </div>
+              <img class="image" [src]="imagemURL" class="img-fluid"  alt="Card image cap"
+              tooltip="Uplaod de Nova Imagem"  placement="bottom" /> -->
             </div>
           </div>
 
@@ -111,9 +116,9 @@
 
         </div>
       </mat-card-content>
-    </mat-card>
+      </mat-card>
 
-    <mat-card class="" formArrayName="lotes">
+      <mat-card class="" formArrayName="lotes">
       <mat-card-header>
         <mat-card-title>
           <div class="d-flex border-bottom">
@@ -143,7 +148,7 @@
 
             <mat-form-field class="mr-3">
               <mat-label>preco</mat-label>
-              <input matInput placeholder="preco" formControlName="preco">
+              <input matInput placeholder="preco" formControlName="preco" >
               <!-- <mat-error *ngIf="lotesArray.at(i).get('preco').hasError('required')">
                 Informe o preço
               </mat-error> -->
@@ -182,11 +187,55 @@
         </mat-list>
 
       </mat-card-content>
-    </mat-card>
-  </form>
+      </mat-card>
 
-  <div class="float-right">
-    <a [routerLink]="['/eventos']" class="btn lx-btn">Voltar</a>
-    <button type="button" class="btn lx-btn" (click)="submit()">Salvar</button>
+  </form>
+</div>
+
+  <div class="col-md-4" *ngIf="!isNew">
+    <div [formGroup]="form" class="card-evento-view shadow-sm">
+      <div class="form-row">
+        <div class="form-group m-0">
+          <input type="file" #file (change)="onFileChange($event)" class="form-control is-invalid" placeholder="" style="display: none">
+        </div>
+      </div>
+      <div class="card profile-card-2">
+        <div class="card-img-block">
+          <img class="image" [src]="imagemURL" class="img-fluid" (click)="file.click()" alt="Card image cap"
+          tooltip="Uplaod de Nova Imagem"  placement="bottom" />
+        </div>
+        <div class="card-body pt-3">
+          <h4>{{evento.tema}}</h4>
+          <p class="card-text">
+            <b>Local:</b> {{evento.local}}
+            <br>
+            <b>Data:</b> {{evento.dataEvento }}
+          </p>
+          <hr>
+          <p class="card-text">
+            <b>Contatos</b><br>
+            <small class="text-muted">Telefone: {{evento.telefone}}</small>
+            <br>
+            <small class="text-muted">e-mail: {{evento.email}}</small>
+          </p>
+          <p class="card-text">
+            Capacidade:
+            <small class="text-muted">{{evento.qtdPessoas}}</small>
+          </p>
+          <div class="row">
+            <div class="icon-block col-md-8 iconesSociais">
+              <a href="">
+                <i class=""></i>
+              </a>
+            </div>
+            <!--div class="col-md-4 d-flex justify-content-center">
+              <a href="#" class="btn btn-outline-primary">Participar</a>
+            </div-->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+
 </div>

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EventoService } from './shared/services/evento.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -17,6 +17,8 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, POSI
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { RouterModule } from '@angular/router';
+import { AccountService } from './shared/services/account.service';
+import { AuthInterceptorInterceptor } from './shared/jwtInterceptor/auth-interceptor.interceptor';
 
 const MOMENT_FORMATS = {
   parse: {
@@ -88,6 +90,8 @@ const ngxCurrencyConfig = {
     // NgxCurrencyModule.forRoot(ngxCurrencyConfig)
   ],
   providers: [EventoService,
+    AccountService,
+    {provide : HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true},
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: false } },
     { provide: MAT_DATE_FORMATS, useValue: MOMENT_FORMATS },
