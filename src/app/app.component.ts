@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './shared/models/identity/User';
+import { AccountService } from './shared/services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'EventosApiAngular';
+
+  constructor(public accountService: AccountService) {}
+
+  ngOnInit(): void {
+    this.setCurrentUser();
+  }
+
+  setCurrentUser(): void {
+    let user: User | any;
+
+    if (localStorage.getItem('user'))
+      user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    else
+      user = null;
+
+    if (user)
+      this.accountService.setCurrentUser(user);
+  }
+
 }
