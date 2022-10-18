@@ -11,11 +11,9 @@ export class AuthGuardGuard implements CanActivate {
     private accountService: AccountService) { }
 
   async canActivate(){
-    const token = this.accountService.getAuthData();
+    const {token} = this.accountService.getAuthData();
 
-    // return true;
-
-    if (!!token) {
+    if (!token) {
       this.router.navigate(['/signin']);
       return false;
     }
