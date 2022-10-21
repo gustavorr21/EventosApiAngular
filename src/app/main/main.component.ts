@@ -20,19 +20,34 @@ export class MainComponent implements OnInit {
     var keys: any[] = [];
     keys.push({'NAVIGATION_ITEMS_MAP' : '',})
 
-    this.itensMenu = keys
+    var menus: any[] = [];
+
+    menus.push({displayName: 'eventos', description: 'descição',
+      route: 'eventos',icon: 'dashboard',order: 'order',active: true,
+    });
+    menus.push({displayName: 'palestrante', description: 'palestrante',
+      route: 'palestrante',icon: 'dashboard',order: 'order',active: false,
+    });
+    menus.push({displayName: 'perfil', description: 'perfil',
+      route: 'perfil',icon: 'dashboard',order: 'order',active: false,
+    });
+    menus.push({displayName: 'contato', description: 'contato',
+      route: 'contato',icon: 'dashboard',order: 'order',active: false,
+    });
+
+    this.itensMenu = menus
         // .filter(key => !!NAVIGATION_ITEMS_MAP[group[key][0].variable])
-        .map(key => {
+        .map(menu => {
           // const functionality = group[key][0];
           // const active = functionality.variable === 'Dashboard';
-
+         debugger;
           return {
-            displayName: 'eventos',
-            description: 'descição',
-            route: 'eventos',
-            icon: 'dashboard',
-            order: 'order',
-            active: true
+            displayName: menu.displayName,
+            description: menu.description,
+            route: menu.route,
+            icon: menu.icon,
+            order: menu.order,
+            active: menu.active,
           };
         })
   }
